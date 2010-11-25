@@ -16,6 +16,8 @@ The calculator features payment protection, and 12 to 60 months calculation.
 
 The plugin can be used for car purchases, mortgage payments, real estate and big loans calculations.
 
+Check the [official homepage](http://www.blogtycoon.net/ "Blog Tycoon") for feedback and support.
+
 == Installation ==
 
 1. Upload to your plugins folder, usually `wp-content/plugins/`
