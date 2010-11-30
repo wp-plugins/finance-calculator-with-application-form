@@ -5,7 +5,7 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.1
+Version: 1.2
 */
 
 /*
@@ -27,6 +27,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 error_reporting(0); // Used for debug
+
+if(!defined('WP_CONTENT_URL'))
+	define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
+if(!defined('WP_PLUGIN_URL'))
+	define('WP_PLUGIN_URL', WP_CONTENT_URL.'/plugins');
+
 add_action('admin_menu', 'wpfc_plugin_menu');
 
 add_option('wpfc_finance_rate', '', '', 'no');
@@ -88,18 +94,20 @@ function wpfc_plugin_options() {
 				<?php _e('Currency Symbol:', 'wpfc');?> <input type="text" name="<?php echo $symbol_field_name;?>" value="<?php echo $option_value_symbol;?>" size="5" />
 				<span class="description">Currency used in application emails. Use EUR, USD, GBP for currency and characters ($, &euro;, &pound;, &yen;) for symbol.</span>
 			</p>
-			<hr />
 			<p class="submit">
 				<input type="submit" name="submit" class="button-primary" value="<?php esc_attr_e('Save Changes');?>" />
 			</p>
 		</form>
 
+		<hr />
 		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator.</p>
 
 		<p>The payment protection insurance policy pays your loan or hires purchase agreement repayments if you are unable to work because of sickness, an accident or you are made unemployed. It will also provide benefit in the event of your death.</p>
 		<p>Eligibility for payment protection is covered under the policy of each company. Please specify these details on the post or page itself.</p>
 
 		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans, mortgages and other large bill obligations that could become a true nightmare should a disability or death occur. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
+
+		<p>For support, feature requests and bug reporting, please visit the <a href="http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official web site</a>.</p>
 	</div>
 <?php
 }
@@ -395,4 +403,16 @@ return $display;
 }
 
 add_shortcode('finance_calculator', 'display_finance_calculator');
+
+// Check for uninstall hook
+if(function_exists('register_uninstall_hook'))
+	register_uninstall_hook(__FILE__, 'wpfc_uninstall');
+
+// Uninstall function
+function wpfc_uninstall() {
+	delete_option('wpfc_finance_rate');
+	delete_option('wpfc_application_email');
+	delete_option('wpfc_currency');
+	delete_option('wpfc_currency_symbol');
+}
 ?>
