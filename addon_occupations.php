@@ -1,5 +1,6 @@
-<?php
-$display_occupations = '<select name="wpfc_occupation" size="1">
+<?php 
+$display_occupations = '
+<select name="wpfc_occupation">
 	<option value="">Please choose...</option>
 	<option value="Accident &amp; Health Insurance">Accident &amp; Health Insurance</option>
 	<option value="Accountant">Accountant</option>

@@ -5,12 +5,12 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.2
+Version: 1.3
 */
 
 /*
 WP Finance Calculator WordPress Plugin
-Copyright (C) 2010 Ciprian Popescu
+Copyright (C) 2010, 2011 Ciprian Popescu
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -139,7 +139,7 @@ function display_finance_calculator() {
 
 	<p><input type="text" name="param_value1" value="" /><input type="hidden" name="param_key1" value="Make" /> Make</p>
 	<p><input type="text" name="param_value2" value="" /><input type="hidden" name="param_key2" value="Model" /> Model</p>
-	<p><input type="text" name="param_value3" value="" /><input type="hidden" name="param_key3" value="Car Spec" /> Spec</div>
+	<p><input type="text" name="param_value3" value="" /><input type="hidden" name="param_key3" value="Car Spec" /> Spec</p>
 	<p><input type="text" name="lead_caryear" value="'.date('Y').'" /> Year</p>
 
 	<p><strong>Finance Details</strong></p>
@@ -177,7 +177,7 @@ function display_finance_calculator() {
 			$display .= '
 		</select> / <select name="DobYear">
 			<option value="">--</option>';
-			for($d3=1990;$d3>=1940;$d3--) {
+			for($d3=2000;$d3>=1940;$d3--) {
 				$display .= '<option value="'.$d3.'">'.$d3.'</option>';
 			}
 			$display .= '
@@ -229,7 +229,7 @@ function display_finance_calculator() {
 			<option value="">No</option>					
 		</select> * Do you consent to having your information credit checked
 	</p>
-	<p><input type="submit" value="Submit Finance Application" name="submit2" />
+	<p><input type="submit" value="Submit Finance Application" name="submit2" /></p>
 </form>
 		';
 		return $display;
@@ -286,10 +286,6 @@ function display_finance_calculator() {
 		// send email using WordPress function
 		$to = $f_email;
 		$mail = wp_mail($to, $subject, $message);
-
-		// use for hindered WP installation // most likely never
-		// $mail = $f_email;
-		// mail($mail, $subject, $mesaj, "From: $mail\nContent-Type: text/html; charset=iso-8859-1");
 
 		if($mail)
 			echo '
