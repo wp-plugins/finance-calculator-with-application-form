@@ -4,7 +4,7 @@ Donate link: http://www.blogtycoon.net/
 Tags: finance, calculator, loans, mortgage, ppp, payment protection, repayments
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 == Description ==
 
@@ -36,6 +36,9 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 2. Administration section
 
 == Changelog ==
+
+= 1.3.1 =
+* Fixed a wrong path issue
 
 = 1.3 =
 * Updated the readme.txt file in the /docs/ folder with more information

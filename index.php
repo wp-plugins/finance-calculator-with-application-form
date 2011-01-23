@@ -5,7 +5,7 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.3
+Version: 1.3.1
 */
 
 /*
@@ -124,7 +124,7 @@ function display_finance_calculator() {
 		$f_currency = get_option('wpfc_currency');
 
 		$display = '
-<script type="text/javascript" src="'.WP_PLUGIN_URL.'/wp-finance-calculator/includes/email-validation-min.js"></script>
+<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/email-validation-min.js"></script>
 <h3>Finance Application Form</h3>
 <p>* Required Fields</p>
 
@@ -206,7 +206,7 @@ function display_finance_calculator() {
 
 	<p><strong>Employment Details</strong></p>
 	<p>';
-	include('wp-content/plugins/wp-finance-calculator/addon_occupations.php');
+	include('wp-content/plugins/finance-calculator-with-application-form/addon_occupations.php');
 	$display .= $display_occupations;
 	$display .= '
 	</p>
@@ -304,7 +304,7 @@ function display_finance_calculator() {
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$display = '
 <script type="text/javascript">var finance_fees=0</script>
-<script type="text/javascript" src="'.WP_PLUGIN_URL.'/wp-finance-calculator/includes/js_financecalc-min.js"></script>
+<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/js_financecalc-min.js"></script>
 
 <h3>Finance Calculator</h3>
 <p><em>The following calculator will give you indicative repayments.</em></p>
