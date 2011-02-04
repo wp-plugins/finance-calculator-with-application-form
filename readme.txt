@@ -37,6 +37,10 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 
 == Changelog ==
 
+= 1.3.2 =
+* Added a new plugin path detection and fixed some more WordPress configurations
+* Users can now override the default finance rate in the shortcode
+
 = 1.3.1 =
 * Fixed a wrong path issue
 

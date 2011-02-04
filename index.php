@@ -5,7 +5,7 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.3.1
+Version: 1.3.2
 */
 
 /*
@@ -39,6 +39,17 @@ add_option('wpfc_finance_rate', '', '', 'no');
 add_option('wpfc_application_email', '', '', 'no');
 add_option('wpfc_currency', '', '', 'no');
 add_option('wpfc_currency_symbol', '', '', 'no');
+
+function chip_getPluginUrl() {
+	//Try to use WP API if possible, introduced in WP 2.6
+	if(function_exists('plugins_url')) return trailingslashit(plugins_url(basename(dirname(__FILE__))));
+
+	//Try to find manually... won't work if 'wp-content' was renamed or is redirected
+	$path = dirname(__FILE__);
+	$path = str_replace("\\","/",$path);
+	$path = trailingslashit(get_bloginfo('wpurl')).trailingslashit(substr($path,strpos($path,"wp-content/")));
+	return $path;
+}
 
 function wpfc_plugin_menu() {
 	add_options_page('WPFC Options', 'WPFC Options', 'manage_options', 'wpfc', 'wpfc_plugin_options');
@@ -100,7 +111,8 @@ function wpfc_plugin_options() {
 		</form>
 
 		<hr />
-		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator.</p>
+		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator. The calculator will use the default finance rate.</p>
+		<p><strong>Note:</strong> You can override the default finance rate by adding a <strong>rate</strong> paramater to the shortcode. Example: <code>[finance_calculator rate=&quot;27&quot;]</code>.</p>
 
 		<p>The payment protection insurance policy pays your loan or hires purchase agreement repayments if you are unable to work because of sickness, an accident or you are made unemployed. It will also provide benefit in the event of your death.</p>
 		<p>Eligibility for payment protection is covered under the policy of each company. Please specify these details on the post or page itself.</p>
@@ -112,7 +124,10 @@ function wpfc_plugin_options() {
 <?php
 }
 
-function display_finance_calculator() {
+function display_finance_calculator($atts, $content = null) {
+	extract(shortcode_atts(array(
+		'rate' => get_option('wpfc_finance_rate')
+	), $atts));
 	if(isset($_POST['submit'])) {
 		$listprice 	= $_POST['NetAmount'];
 		$amount 	= $_POST['NetAmount'];
@@ -123,8 +138,9 @@ function display_finance_calculator() {
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$f_currency = get_option('wpfc_currency');
 
+		$plugin_directory = chip_getPluginUrl();
 		$display = '
-<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/email-validation-min.js"></script>
+<script type="text/javascript" src="'.$plugin_directory.'/includes/email-validation-min.js"></script>
 <h3>Finance Application Form</h3>
 <p>* Required Fields</p>
 
@@ -206,7 +222,7 @@ function display_finance_calculator() {
 
 	<p><strong>Employment Details</strong></p>
 	<p>';
-	include('wp-content/plugins/finance-calculator-with-application-form/addon_occupations.php');
+	include('addon_occupations.php');
 	$display .= $display_occupations;
 	$display .= '
 	</p>
@@ -300,11 +316,12 @@ function display_finance_calculator() {
 	}
 
 	else {
-		$f_rate = get_option('wpfc_finance_rate');
+		$plugin_directory = chip_getPluginUrl();
+		$f_rate = $rate; // extract from shortcode instead of get_option('wpfc_finance_rate'); // added in 1.3.2
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$display = '
 <script type="text/javascript">var finance_fees=0</script>
-<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/js_financecalc-min.js"></script>
+<script type="text/javascript" src="'.$plugin_directory.'includes/js_financecalc-min.js"></script>
 
 <h3>Finance Calculator</h3>
 <p><em>The following calculator will give you indicative repayments.</em></p>
