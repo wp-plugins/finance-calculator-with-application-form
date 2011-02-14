@@ -5,7 +5,7 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.3.2
+Version: 1.3.3
 */
 
 /*
@@ -49,6 +49,31 @@ function chip_getPluginUrl() {
 	$path = str_replace("\\","/",$path);
 	$path = trailingslashit(get_bloginfo('wpurl')).trailingslashit(substr($path,strpos($path,"wp-content/")));
 	return $path;
+}
+
+// Change email sender name from "WordPress" to the blog's name
+if(!class_exists('wp_mail_from')) {
+	class wp_mail_from {
+		function wp_mail_from() {
+			//add_filter( 'wp_mail_from', array(&$this, 'fb_mail_from') );
+			add_filter( 'wp_mail_from_name', array(&$this, 'fb_mail_from_name') );
+		}
+
+		// new name
+		function fb_mail_from_name() {
+			$name = get_option('blogname');
+			$name = esc_attr($name);
+			return $name;
+		}
+		// new email-adress
+		//function fb_mail_from() {
+			//$email = 'info@example.com';
+			//$email = is_email($email);
+			//return $email;
+		//}
+	}
+
+	$wp_mail_from = new wp_mail_from();
 }
 
 function wpfc_plugin_menu() {
@@ -300,8 +325,13 @@ function display_finance_calculator($atts, $content = null) {
 		add_filter('wp_mail_content_type','set_contenttype');
 
 		// send email using WordPress function
+		$headers = 
+			"MIME-Version: 1.0\n".
+			"From: ".$_POST['EMAIL_2']."\n".
+			"Content-Type: text/html; charset=\"".get_settings('blog_charset')."\"\n";
+
 		$to = $f_email;
-		$mail = wp_mail($to, $subject, $message);
+		$mail = wp_mail($to, $subject, $message, $headers);
 
 		if($mail)
 			echo '
