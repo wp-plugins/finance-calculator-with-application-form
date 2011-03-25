@@ -5,10 +5,8 @@ Plugin URI: http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://www.blogtycoon.net/
-Version: 1.3.3
-*/
+Version: 1.3.4
 
-/*
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011 Ciprian Popescu
 
@@ -26,8 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-error_reporting(0); // Used for debug
-
 if(!defined('WP_CONTENT_URL'))
 	define('WP_CONTENT_URL', get_option('siteurl').'/wp-content');
 if(!defined('WP_PLUGIN_URL'))
@@ -39,17 +35,6 @@ add_option('wpfc_finance_rate', '', '', 'no');
 add_option('wpfc_application_email', '', '', 'no');
 add_option('wpfc_currency', '', '', 'no');
 add_option('wpfc_currency_symbol', '', '', 'no');
-
-function chip_getPluginUrl() {
-	//Try to use WP API if possible, introduced in WP 2.6
-	if(function_exists('plugins_url')) return trailingslashit(plugins_url(basename(dirname(__FILE__))));
-
-	//Try to find manually... won't work if 'wp-content' was renamed or is redirected
-	$path = dirname(__FILE__);
-	$path = str_replace("\\","/",$path);
-	$path = trailingslashit(get_bloginfo('wpurl')).trailingslashit(substr($path,strpos($path,"wp-content/")));
-	return $path;
-}
 
 // Change email sender name from "WordPress" to the blog's name
 if(!class_exists('wp_mail_from')) {
@@ -81,10 +66,6 @@ function wpfc_plugin_menu() {
 }
 
 function wpfc_plugin_options() {
-	if(!current_user_can('manage_options')) {
-		wp_die(__('You do not have sufficient permissions to access this page.'));
-	}
-
 	$hidden_field_name = 'wpfc_submit_hidden';
 	$data_field_name = 'wpfc_finance_rate';
 	$email_field_name = 'wpfc_application_email';
@@ -109,42 +90,47 @@ function wpfc_plugin_options() {
 		update_option('wpfc_currency', $option_value_currency);
 		update_option('wpfc_currency_symbol', $option_value_symbol);
 		?>
-		<div class="updated"><p><strong><?php _e('Settings saved.', 'wpfc');?></strong></p></div>
+		<div class="updated"><p><strong>Settings saved.</strong></p></div>
 		<?php
 	}
 	echo '<div class="wrap">';
-		echo '<h2>'.__('Finance Calculator Settings', 'wpfc').'</h2>';
+		echo '<h2>Finance Calculator Settings</h2>';
 		?>
 		<form name="form1" method="post" action="">
 			<input type="hidden" name="<?php echo $hidden_field_name;?>" value="Y" />
 			<p>
-				<?php _e('Finance Rate:', 'wpfc');?> <input type="text" name="<?php echo $data_field_name;?>" value="<?php echo $option_value_data;?>" size="10" />
-				<span class="description">Monthly payment will be calculated using this rate.</span>
+				<input type="text" name="<?php echo $data_field_name;?>" id="<?php echo $data_field_name;?>" value="<?php echo $option_value_data;?>" size="3" /> <label for="<?php echo $data_field_name;?>">Finance Rate</label>
+				<br />
+				<span class="description"><small>Monthly payment will be calculated using this rate.</small></span>
 			</p>
 			<p>
-				<?php _e('Application Email:', 'wpfc');?> <input type="text" name="<?php echo $email_field_name;?>" value="<?php echo $option_value_email;?>" size="20" />
-				<span class="description">Application emails will be sent to this address.</span>
+				<input type="text" name="<?php echo $email_field_name;?>" id="<?php echo $email_field_name;?>" value="<?php echo $option_value_email;?>" size="20" /> <label for="<?php echo $email_field_name;?>">Application Email</label>
+				<br />
+				<span class="description"><small>Application emails will be sent to this address.</small></span>
 			</p>
 			<p>
-				<?php _e('Currency:', 'wpfc');?> <input type="text" name="<?php echo $currency_field_name;?>" value="<?php echo $option_value_currency;?>" size="3" /> 
-				<?php _e('Currency Symbol:', 'wpfc');?> <input type="text" name="<?php echo $symbol_field_name;?>" value="<?php echo $option_value_symbol;?>" size="5" />
-				<span class="description">Currency used in application emails. Use EUR, USD, GBP for currency and characters ($, &euro;, &pound;, &yen;) for symbol.</span>
+				<input type="text" name="<?php echo $currency_field_name;?>" id="<?php echo $currency_field_name;?>" value="<?php echo $option_value_currency;?>" size="3" /> <label for="<?php echo $currency_field_name;?>">Currency</label>
+				<br />
+				<input type="text" name="<?php echo $symbol_field_name;?>" id="<?php echo $symbol_field_name;?>" value="<?php echo $option_value_symbol;?>" size="3" /> <label for="<?php echo $symbol_field_name;?>">Currency Symbol</label>
+				<br />
+				<span class="description"><small>Currency used in application emails. Use USD, EUR, GBP, YEN/JPY for currency and characters ($, &euro;, &pound;, &yen;) for symbol.</small></span>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button-primary" value="<?php esc_attr_e('Save Changes');?>" />
+				<input type="submit" name="submit" class="button-primary" value="Save Changes" />
 			</p>
 		</form>
 
 		<hr />
 		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator. The calculator will use the default finance rate.</p>
-		<p><strong>Note:</strong> You can override the default finance rate by adding a <strong>rate</strong> paramater to the shortcode. Example: <code>[finance_calculator rate=&quot;27&quot;]</code>.</p>
+		<p>In order to correctly render the currency symbol, make sure you have the correct encoding in your theme header: <code>&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code> or <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> if you are using HTML5.</p>
+		<p><strong>Note:</strong> You can override the default finance rate by adding a <strong>rate</strong> parameter to the shortcode. Example: <code>[finance_calculator rate=&quot;27&quot;]</code>.</p>
 
-		<p>The payment protection insurance policy pays your loan or hires purchase agreement repayments if you are unable to work because of sickness, an accident or you are made unemployed. It will also provide benefit in the event of your death.</p>
+		<p>The payment protection insurance policy pays your loan or hires purchase agreement repayments if you are unable to work because of sickness, an accident or unemployment. It will also provide benefit in the event of your death.</p>
 		<p>Eligibility for payment protection is covered under the policy of each company. Please specify these details on the post or page itself.</p>
 
-		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans, mortgages and other large bill obligations that could become a true nightmare should a disability or death occur. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
+		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans, mortgages and other large bill obligations that could become a true nightmare should a disability or death occurs. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
 
-		<p>For support, feature requests and bug reporting, please visit the <a href="http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official web site</a>.</p>
+		<p>For support, feature requests and bug reporting, please visit the <a href="http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official website</a>.</p>
 	</div>
 <?php
 }
@@ -163,9 +149,8 @@ function display_finance_calculator($atts, $content = null) {
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$f_currency = get_option('wpfc_currency');
 
-		$plugin_directory = chip_getPluginUrl();
 		$display = '
-<script type="text/javascript" src="'.$plugin_directory.'/includes/email-validation-min.js"></script>
+<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/email-validation-min.js"></script>
 <h3>Finance Application Form</h3>
 <p>* Required Fields</p>
 
@@ -346,12 +331,11 @@ function display_finance_calculator($atts, $content = null) {
 	}
 
 	else {
-		$plugin_directory = chip_getPluginUrl();
 		$f_rate = $rate; // extract from shortcode instead of get_option('wpfc_finance_rate'); // added in 1.3.2
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$display = '
 <script type="text/javascript">var finance_fees=0</script>
-<script type="text/javascript" src="'.$plugin_directory.'includes/js_financecalc-min.js"></script>
+<script type="text/javascript" src="'.WP_PLUGIN_URL.'/finance-calculator-with-application-form/includes/js_financecalc-min.js"></script>
 
 <h3>Finance Calculator</h3>
 <p><em>The following calculator will give you indicative repayments.</em></p>

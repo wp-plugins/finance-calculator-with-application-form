@@ -4,7 +4,7 @@ Donate link: http://www.blogtycoon.net/
 Tags: finance, calculator, loans, mortgage, ppp, payment protection, repayments
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 
 == Description ==
 
@@ -36,6 +36,13 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 2. Administration section
 
 == Changelog ==
+
+= 1.3.4 =
+* Fixed a large string issue in occupations list
+* Fixed a URL/directory detection function (replaced with WordPress specific function)
+* Fixed several typos
+* Removed several unused parameters
+* Removed a deprecated capability function
 
 = 1.3.3 =
 * Changed name of email sender in application form instead of using the default "wordpress@yourdomain.com" (thanks @RedBlood)
