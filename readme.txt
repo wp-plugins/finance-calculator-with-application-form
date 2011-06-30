@@ -1,10 +1,10 @@
 === WP Finance Calculator ===
 Contributors: butterflymedia
-Donate link: http://www.blogtycoon.net/
+Donate link: http://www.getbutterfly.com/
 Tags: finance, calculator, loans, mortgage, ppp, payment protection, repayments
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 
 == Description ==
 
@@ -36,6 +36,9 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 2. Administration section
 
 == Changelog ==
+
+= 1.3.5 =
+* Changed author URL address
 
 = 1.3.4 =
 * Fixed a large string issue in occupations list
