@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Finance Calculator
-Plugin URI: http://www.getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/
+Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
-Author URI: http://www.getbutterfly.com/
-Version: 1.3.5
+Author URI: http://getbutterfly.com/
+Version: 1.3.6
 
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011 Ciprian Popescu
@@ -94,6 +94,7 @@ function wpfc_plugin_options() {
 		<?php
 	}
 	echo '<div class="wrap">';
+		echo '<div id="icon-options-general" class="icon32"></div>';
 		echo '<h2>Finance Calculator Settings</h2>';
 		?>
 		<form name="form1" method="post" action="">
@@ -130,7 +131,7 @@ function wpfc_plugin_options() {
 
 		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans, mortgages and other large bill obligations that could become a true nightmare should a disability or death occurs. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
 
-		<p>For support, feature requests and bug reporting, please visit the <a href="http://www.getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official website</a>.</p>
+		<p>For support, feature requests and bug reporting, please visit the <a href="http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official website</a>.</p>
 	</div>
 <?php
 }
