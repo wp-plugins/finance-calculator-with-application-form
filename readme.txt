@@ -1,10 +1,10 @@
 === WP Finance Calculator ===
-Contributors: butterflymedia
-Donate link: http://www.getbutterfly.com/
+Contributors: butterflymedia, getbutterfly
+Donate link: http://getbutterfly.com/
 Tags: finance, calculator, loans, mortgage, ppp, payment protection, repayments
 Requires at least: 2.8
-Tested up to: 3.2.1
-Stable tag: 1.3.6
+Tested up to: 3.4.1
+Stable tag: 1.4
 
 == Description ==
 
@@ -16,7 +16,7 @@ The calculator features payment protection, and 12 to 60 months calculation.
 
 The plugin can be used for car purchases, mortgage payments, real estate and big loans calculations.
 
-Check the [official homepage](http://www.blogtycoon.net/wordpress-plugins/finance-calculator-with-application-form/ "Blog Tycoon") for feedback and support.
+Check the [official homepage](http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/ "getButterfly") for feedback and support.
 
 == Installation ==
 
@@ -37,7 +37,16 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 
 == Changelog ==
 
-= 1.3.5 =
+= 1.4 =
+* Added variable/modifiable finance rate
+* Added author credit option
+* Validated compatibility with version 3.4
+
+= 1.3.7 =
+* Updated author links
+* Validated compatibility with version 3.3
+
+= 1.3.6 =
 * Updated author links
 * Small backend UI changes
 
