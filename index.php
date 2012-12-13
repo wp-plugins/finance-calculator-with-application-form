@@ -5,7 +5,7 @@ Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-ap
 Description: WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.4
+Version: 1.4.1
 
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011, 2012 Ciprian Popescu (getbutterfly@gmail.com)
@@ -129,12 +129,17 @@ function wpfc_plugin_options() {
 		<hr />
 		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator. The calculator will use the default finance rate.</p>
 		<p>In order to correctly render the currency symbol, make sure you have the correct encoding in your theme header: <code>&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code> or <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> if you are using HTML5.</p>
-		<p><strong>Note:</strong> You can override the default finance rate by adding a <strong>rate</strong> parameter to the shortcode. Example: <code>[finance_calculator rate=&quot;27&quot;]</code>.</p>
+		<p>
+			<strong>Notes:</strong><br />
+			You can override the default finance rate by adding a <code><strong>rate</strong></code> parameter to the shortcode. Example: <code>[finance_calculator rate=&quot;27&quot;]</code>.<br />
+			You can restrict the price field adding a <code><strong>price</strong></code> parameter to the shortcode. Example: <code>[finance_calculator price=&quot;16000&quot;]</code>.<br />
+			<small>Do not use comma or period inside the price parameter (i.e. do not use <b>16.000</b> or <b>16,000</b> - use <b>16000</b>)</small>
+		</p>
 
 		<p>The payment protection insurance policy pays your loan or hires purchase agreement repayments if you are unable to work because of sickness, an accident or unemployment. It will also provide benefit in the event of your death.</p>
 		<p>Eligibility for payment protection is covered under the policy of each company. Please specify these details on the post or page itself.</p>
 
-		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans, mortgages and other large bill obligations that could become a true nightmare should a disability or death occurs. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
+		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans and other large bill obligations that could become a true nightmare should a disability or death occurs. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
 
 		<p>For support, feature requests and bug reporting, please visit the <a href="http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official website</a>.</p>
 	</div>
@@ -143,7 +148,8 @@ function wpfc_plugin_options() {
 
 function display_finance_calculator($atts, $content = null) {
 	extract(shortcode_atts(array(
-		'rate' => get_option('wpfc_finance_rate')
+		'rate' => get_option('wpfc_finance_rate'),
+		'price' => ''
 	), $atts));
 	if(isset($_POST['submit'])) {
 		$listprice 	= $_POST['NetAmount'];
@@ -340,98 +346,99 @@ function display_finance_calculator($atts, $content = null) {
 		$f_rate = $rate; // extract from shortcode instead of get_option('wpfc_finance_rate'); // added in 1.3.2
 		$f_symbol = get_option('wpfc_currency_symbol');
 		$display = '
-<script type="text/javascript">var finance_fees=0</script>
-<script type="text/javascript" src="'.WPFC_PLUGIN_URL.'/includes/js_financecalc-min.js"></script>
+		<script src="' . WPFC_PLUGIN_URL . '/includes/js_financecalc-min.js"></script>
 
-<h3>Finance Calculator</h3>
-<p><em>The following calculator will give you indicative repayments.</em></p>
-<form name="Finance" action="'.$_SERVER['REQUEST_URI'].'" method="post" onsubmit="Calculate();">
-	<div>
-		<!-- Balloon value -->
-		<input name="PcentBalloon" value="0" type="hidden" />
-	</div>
-	<table border="0" summary="form">
-		<tbody>
-			<tr>
-				<td>Price of Car</td>
-				<td><input name="NetAmount" value="0" size="8" type="number" onfocus="Calculate();" /></td>
-			</tr>
-			<tr>
-				<td>Finance Rate:</td>
-				<td><input name="Rate" value="'.$f_rate.'" type="number" min="0" max="100" step="0.1" onfocus="Calculate();" />%</td>
-			</tr>
-			<tr>
-				<td>Less Deposit:</td>
-				<td><input maxlength="8" name="Deposit" size="8" type="number" value="0" onfocus="Calculate();" /></td>
-			</tr>
-			<tr>
-				<td>Less Trade In Allowance:</td>
-				<td><input maxlength="8" name="TradeIn" size="8" type="number" value="0" onfocus="Calculate();" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><p>Monthly payment <input name="Include" value="including" size="7" readonly="readonly" type="text" /> payment protection, presuming a typical APR of '.$f_rate.'%:</p></td>
-			</tr>
-			<tr>
-				<td class="finance_repayments"><input name="finance_Months" value="12" onclick="Calculate();" type="radio" /> 12 months: '.$f_symbol.'</td>
-				<td>
-					<input value="0" name="monthpay1" size="7" readonly="readonly" type="text" />/month
-					<input value="0" name="finalpay1" size="10" type="hidden" />
-					<input value="0" name="credit1" size="10" type="hidden" />
-					<input value="0" name="total1" size="10" type="hidden" />
-				</td>
-			</tr>
-			<tr>
-				<td><input name="finance_Months" value="24" onclick="Calculate();" type="radio" /> 24 months: '.$f_symbol.'</td>
-				<td>
-					<input value="0" name="monthpay2" size="7" readonly="readonly" />/month
-					<input value="0" name="finalpay2" size="10" type="hidden" />
-					<input value="0" name="credit2" size="10" type="hidden" />
-					<input value="0" name="total2" size="10" type="hidden" />
-				</td>
-			</tr>
-			<tr>
-				<td><input name="finance_Months" value="36" onclick="Calculate();" type="radio" /> 36 months: '.$f_symbol.'</td>
-				<td>
-					<input value="0" name="monthpay3" size="7" readonly="readonly" />/month
-					<input value="0" name="finalpay3" size="10" type="hidden" />
-					<input value="0" name="credit3" size="10" type="hidden" />
-					<input value="0" name="total3" size="10" type="hidden" />
-				</td>
-			</tr>
-			<tr>
-				<td><input name="finance_Months" value="48" onclick="Calculate();" type="radio" /> 48 months: '.$f_symbol.'</td>
-				<td>
-					<input value="0" name="monthpay4" size="7" readonly="readonly" />/month
-					<input value="0" name="finalpay4" size="10" type="hidden" />
-					<input value="0" name="credit4" size="10" type="hidden" />
-					<input value="0" name="total4" size="10" type="hidden" />
-				</td>
-			</tr>
-			<tr>
-				<td><input name="finance_Months" value="60" onclick="Calculate();" checked="checked" type="radio" /> 60 months: '.$f_symbol.'</td>
-				<td>
-					<input value="0" name="monthpay5" size="7" readonly="readonly" />/month
-					<input value="0" name="finalpay5" size="10" type="hidden" />
-					<input value="0" name="credit5" size="10" type="hidden" />
-					<input value="0" name="total5" size="10" type="hidden" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" class="financecost"> Total cost of the credit: '.$f_symbol.'<input value="0" readonly="readonly" id="total_cost" size="8" type="text" /></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input checked="checked" name="PPP" value="Yes" onclick="Calculate()" type="checkbox" /> Check/uncheck this box to view figures with/without Payment Protection </td>
-			</tr>
-			<tr>
-				<td colspan="2"><input onclick="Calculate()" value="Calculate" type="button" /> <input type="submit" name="submit" value="Make Finance Application" /></td>
-			</tr>';
+		<h3>Finance Calculator</h3>
+		<p><em>The following calculator will give you indicative repayments.</em></p>
+		<form name="Finance" action="' . $_SERVER['REQUEST_URI'] . '" method="post" onsubmit="Calculate();">
+			<input name="PcentBalloon" value="0" type="hidden">
+			<table border="0" summary="form">
+				<tbody>';
+					if($price != '')
+						$display .= '<input name="NetAmount" value="' . $price . '" type="hidden" />';
+					else
+						$display .= '<tr><td>Price of Car</td><td><input name="NetAmount" value="0" size="8" type="number" onfocus="Calculate();" /></td></tr>';
+					$display .= '
+					<tr>
+						<td>Finance Rate:</td>
+						<td><input name="Rate" value="' . $f_rate . '" type="number" min="0" max="100" step="0.1" onfocus="Calculate();" />%</td>
+					</tr>
+					<tr>
+						<td>Less Deposit:</td>
+						<td><input maxlength="8" name="Deposit" size="8" type="number" value="0" onfocus="Calculate();" /></td>
+					</tr>
+					<tr>
+						<td>Less Trade In Allowance:</td>
+						<td><input maxlength="8" name="TradeIn" size="8" type="number" value="0" onfocus="Calculate();" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><p>Monthly payment <input name="Include" value="including" size="7" readonly="readonly" type="text" /> payment protection, presuming a typical APR of '.$f_rate.'%:</p></td>
+					</tr>
+					<tr>
+						<td class="finance_repayments"><input name="finance_Months" value="12" onclick="Calculate();" type="radio" /> 12 months: '.$f_symbol.'</td>
+						<td>
+							<input value="0" name="monthpay1" size="7" readonly="readonly" type="text" />/month
+							<input value="0" name="finalpay1" size="10" type="hidden" />
+							<input value="0" name="credit1" size="10" type="hidden" />
+							<input value="0" name="total1" size="10" type="hidden" />
+						</td>
+					</tr>
+					<tr>
+						<td><input name="finance_Months" value="24" onclick="Calculate();" type="radio" /> 24 months: '.$f_symbol.'</td>
+						<td>
+							<input value="0" name="monthpay2" size="7" readonly="readonly" />/month
+							<input value="0" name="finalpay2" size="10" type="hidden" />
+							<input value="0" name="credit2" size="10" type="hidden" />
+							<input value="0" name="total2" size="10" type="hidden" />
+						</td>
+					</tr>
+					<tr>
+						<td><input name="finance_Months" value="36" onclick="Calculate();" type="radio" /> 36 months: '.$f_symbol.'</td>
+						<td>
+							<input value="0" name="monthpay3" size="7" readonly="readonly" />/month
+							<input value="0" name="finalpay3" size="10" type="hidden" />
+							<input value="0" name="credit3" size="10" type="hidden" />
+							<input value="0" name="total3" size="10" type="hidden" />
+						</td>
+					</tr>
+					<tr>
+						<td><input name="finance_Months" value="48" onclick="Calculate();" type="radio" /> 48 months: '.$f_symbol.'</td>
+						<td>
+							<input value="0" name="monthpay4" size="7" readonly="readonly" />/month
+							<input value="0" name="finalpay4" size="10" type="hidden" />
+							<input value="0" name="credit4" size="10" type="hidden" />
+							<input value="0" name="total4" size="10" type="hidden" />
+						</td>
+					</tr>
+					<tr>
+						<td><input name="finance_Months" value="60" onclick="Calculate();" checked="checked" type="radio" /> 60 months: '.$f_symbol.'</td>
+						<td>
+							<input value="0" name="monthpay5" size="7" readonly="readonly" />/month
+							<input value="0" name="finalpay5" size="10" type="hidden" />
+							<input value="0" name="credit5" size="10" type="hidden" />
+							<input value="0" name="total5" size="10" type="hidden" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="financecost"> Total cost of the credit: '.$f_symbol.'<input value="0" readonly="readonly" id="total_cost" size="8" type="text" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input checked="checked" name="PPP" value="Yes" onclick="Calculate()" type="checkbox" /> Check/uncheck this box to view figures with/without Payment Protection </td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<p>
+								<input onclick="Calculate()" value="Calculate" type="button" /> <input type="submit" name="submit" value="Make Finance Application" />
+							</p>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>';
 		if(get_option('wpfc_credit') == 1)
-			$display .= '<tr><td colspan="2"><small>Finance Calculator created by <a href="http://getbutterfly.com/" rel="external">getButterfly</a></small></td></tr>';
-		$display .= '</tbody>
-	</table>
-</form>
-';
-return $display;
+			$display .= '<p><small>Finance Calculator created by <a href="http://getbutterfly.com/" rel="external">getButterfly</a></small></p>';
+
+		return $display;
 	}
 }
 

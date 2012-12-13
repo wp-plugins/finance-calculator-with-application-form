@@ -37,4 +37,4 @@ else{SubTotal2=(1/(MonthlyRate*(Math.pow(1+MonthlyRate,Periods))));MonthlyFinanc
 else{document.Finance.monthpay5.value=Math.round(((MonthlyFinanceCost1+MonthlyFinanceCost2))*100)/100;}
 document.Finance.finalpay5.value=Math.round((BalloonValue)*100)/100;document.Finance.total5.value=Math.round((((MonthlyFinanceCost1+MonthlyFinanceCost2)*Periods)+BalloonValue)*100)/100;document.Finance.credit5.value=Math.round((document.Finance.total5.value-NetCost)*100)/100;}}}}
 for(var c=0;c<document.Finance.finance_Months.length;c++){if(document.Finance.finance_Months[c].checked){ppayment=parseFloat(eval('document.Finance.monthpay'+(c+1)+'.value*document.Finance.finance_Months['+c+'].value'));break;}}
-document.getElementById('total_cost').value=Math.round((ppayment+finance_fees)*100)/100;}
+document.getElementById('total_cost').value=Math.round(ppayment*100)/100;}

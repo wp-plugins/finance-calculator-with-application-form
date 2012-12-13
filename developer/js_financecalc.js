@@ -179,5 +179,5 @@ function Calculate(){
 			break;
 		}
 	}
-	document.getElementById('total_cost').value = Math.round((ppayment+finance_fees)*100)/100;
+	document.getElementById('total_cost').value = Math.round(ppayment*100)/100;
 }
