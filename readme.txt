@@ -1,14 +1,14 @@
-=== WP Finance Calculator ===
+=== Finance Calculator ===
 Contributors: butterflymedia, getbutterfly
 Donate link: http://getbutterfly.com/
 Tags: finance, calculator, loans, ppp, payment protection, repayments
-Requires at least: 2.8
-Tested up to: 3.5
-Stable tag: 1.4.1
+Requires at least: 3.0
+Tested up to: 3.5.1
+Stable tag: 1.4.2
 
 == Description ==
 
-WP Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post. It contains a real-time AJAX calculation option, which degrades gracefully on older browsers and uses a button to calculate repayments.
+Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post. It contains a real-time AJAX calculation option, which degrades gracefully on older browsers and uses a button to calculate repayments.
 
 The plugin also contains an application form which sends a message to a specified email address.
 
@@ -32,10 +32,23 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 
 == Screenshots ==
 
-1. Front-end form
-2. Administration section
+1. Administration section
+2. Front-end form
+3. Front-end form (application)
+3. Front-end form (details)
 
 == Changelog ==
+
+= 1.4.2 =
+* Added default values for finance rate and currency
+* Added translation engine (the plugin is now translatable, en_US and en_GB are included)
+* Updated default options (WordPress specific code)
+* Updated options form with HTML5 valid fields
+* Updated plugin name and description for less ambiguity
+* Fixed some English phrases and typos
+* Removed page title due to duplication (both page title and form title are the same)
+* Removed Javascript minification due to low ratio (14%) and potential conflict with caching plugins
+* Removed occupations dropdown and replaced with text input (better for language locales)
 
 = 1.4.1 =
 * Added price option (shortcode parameter)
@@ -92,13 +105,9 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 = 1.1 =
 * Added new features
 * Added administration section
+* Added possibility of modifiying rates and application email.
 * Fixed typos
 * Optimized scripts
 
 = 1.0 =
 * First release
-
-== Upgrade Notice ==
-
-= 1.1 =
-Added possibility of modifiying rates and application email.

@@ -1,0 +1,416 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress Finance Calculator\n"
+"POT-Creation-Date: 2013-02-23 09:51+0200\n"
+"PO-Revision-Date: 2013-02-23 09:52+0200\n"
+"Last-Translator: Ciprian Popescu <getbutterfly@gmail.com>\n"
+"Language-Team: Ciprian Popescu <getbutterfly@gmail.com>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-SearchPath-1: .\n"
+
+#: ../index.php:65
+msgid "Finance Calculator"
+msgstr ""
+
+#: ../index.php:170
+msgid "Finance Application Form"
+msgstr ""
+
+#: ../index.php:171
+msgid "Required Fields"
+msgstr ""
+
+#: ../index.php:180
+msgid "Vehicle Details"
+msgstr ""
+
+#: ../index.php:183 ../index.php:291
+msgid "Make"
+msgstr ""
+
+#: ../index.php:184 ../index.php:292
+msgid "Model"
+msgstr ""
+
+#: ../index.php:185
+msgid "Spec"
+msgstr ""
+
+#: ../index.php:186
+msgid "Year"
+msgstr ""
+
+#: ../index.php:189
+msgid "Finance Details"
+msgstr ""
+
+#: ../index.php:192
+msgid "List Price"
+msgstr ""
+
+#: ../index.php:193
+msgid "Amount"
+msgstr ""
+
+#: ../index.php:194 ../index.php:288
+msgid "Deposit"
+msgstr ""
+
+#: ../index.php:195
+msgid "Trade In"
+msgstr ""
+
+#: ../index.php:198
+msgid "Applicant Details"
+msgstr ""
+
+#: ../index.php:201
+msgid "Please enter your first name!"
+msgstr ""
+
+#: ../index.php:201
+msgid "First Name"
+msgstr ""
+
+#: ../index.php:202
+msgid "Please enter your last name!"
+msgstr ""
+
+#: ../index.php:202
+msgid "Last Name"
+msgstr ""
+
+#: ../index.php:203
+msgid "Work Phone"
+msgstr ""
+
+#: ../index.php:204
+msgid "Home Phone"
+msgstr ""
+
+#: ../index.php:205
+msgid "Mobile Phone"
+msgstr ""
+
+#: ../index.php:206 ../index.php:284 ../index.php:302
+msgid "Email Address"
+msgstr ""
+
+#: ../index.php:207
+msgid "Confirm Email Address"
+msgstr ""
+
+#: ../index.php:208 ../index.php:295
+msgid "Address"
+msgstr ""
+
+#: ../index.php:209
+msgid "Previous Address"
+msgstr ""
+
+#: ../index.php:209
+msgid "If less than 3 years"
+msgstr ""
+
+#: ../index.php:210
+msgid "Years at Address"
+msgstr ""
+
+#: ../index.php:211
+msgid "Years at Previous Address"
+msgstr ""
+
+#: ../index.php:232 ../index.php:283
+msgid "Date of Birth"
+msgstr ""
+
+#: ../index.php:234
+msgid "House Owner"
+msgstr ""
+
+#: ../index.php:235
+msgid "Tenant"
+msgstr ""
+
+#: ../index.php:236
+msgid "Living with Parents"
+msgstr ""
+
+#: ../index.php:237
+msgid "Living Arrangement"
+msgstr ""
+
+#: ../index.php:239
+msgid "Single"
+msgstr ""
+
+#: ../index.php:240
+msgid "Married"
+msgstr ""
+
+#: ../index.php:241
+msgid "Other"
+msgstr ""
+
+#: ../index.php:242 ../index.php:307
+msgid "Marital Status"
+msgstr ""
+
+#: ../index.php:244
+msgid "Phone"
+msgstr ""
+
+#: ../index.php:245
+msgid "Email"
+msgstr ""
+
+#: ../index.php:246
+msgid "Reply By"
+msgstr ""
+
+#: ../index.php:249
+msgid "Employment Details"
+msgstr ""
+
+#: ../index.php:250 ../index.php:310
+msgid "Occupation"
+msgstr ""
+
+#: ../index.php:252
+msgid "Employer Name"
+msgstr ""
+
+#: ../index.php:253
+msgid "Employer Address"
+msgstr ""
+
+#: ../index.php:254
+msgid "years"
+msgstr ""
+
+#: ../index.php:254 ../index.php:378 ../index.php:387 ../index.php:396
+#: ../index.php:405 ../index.php:414
+msgid "months"
+msgstr ""
+
+#: ../index.php:254
+msgid "Duration of Employment"
+msgstr ""
+
+#: ../index.php:255
+msgid "Monthly Income (Net)"
+msgstr ""
+
+#: ../index.php:256
+msgid "Monthly Mortgage"
+msgstr ""
+
+#: ../index.php:257
+msgid "Spouse Income (Net)"
+msgstr ""
+
+#: ../index.php:258 ../index.php:296
+msgid "Bank"
+msgstr ""
+
+#: ../index.php:259 ../index.php:297
+msgid "Branch"
+msgstr ""
+
+#: ../index.php:260 ../index.php:294
+msgid "Account Number"
+msgstr ""
+
+#: ../index.php:263
+msgid "Additional Information"
+msgstr ""
+
+#: ../index.php:267
+msgid "Select an option..."
+msgstr ""
+
+#: ../index.php:268
+msgid "Yes"
+msgstr ""
+
+#: ../index.php:269
+msgid "No"
+msgstr ""
+
+#: ../index.php:270
+msgid "Do you consent to having your information credit checked"
+msgstr ""
+
+#: ../index.php:272
+msgid "Submit Finance Application"
+msgstr ""
+
+#: ../index.php:279
+msgid "Finance Application Form Email"
+msgstr ""
+
+#: ../index.php:282
+msgid "Allow credit check?"
+msgstr ""
+
+#: ../index.php:285
+msgid "Final price"
+msgstr ""
+
+#: ../index.php:286
+msgid "List price"
+msgstr ""
+
+#: ../index.php:287
+msgid "Trade in"
+msgstr ""
+
+#: ../index.php:289
+msgid "Months"
+msgstr ""
+
+#: ../index.php:290
+msgid "Comment"
+msgstr ""
+
+#: ../index.php:293
+msgid "Car spec"
+msgstr ""
+
+#: ../index.php:298
+msgid "Company"
+msgstr ""
+
+#: ../index.php:299
+msgid "Company address"
+msgstr ""
+
+#: ../index.php:300
+msgid "Company months"
+msgstr ""
+
+#: ../index.php:301
+msgid "Company years"
+msgstr ""
+
+#: ../index.php:303
+msgid "Name"
+msgstr ""
+
+#: ../index.php:304
+msgid "Homephone"
+msgstr ""
+
+#: ../index.php:305
+msgid "Income"
+msgstr ""
+
+#: ../index.php:306
+msgid "Live arr"
+msgstr ""
+
+#: ../index.php:308
+msgid "Mobile"
+msgstr ""
+
+#: ../index.php:309
+msgid "Mortgage"
+msgstr ""
+
+#: ../index.php:311
+msgid "Previous address"
+msgstr ""
+
+#: ../index.php:312
+msgid "Spouse income"
+msgstr ""
+
+#: ../index.php:313
+msgid "Time at address"
+msgstr ""
+
+#: ../index.php:314
+msgid "Time at previous address"
+msgstr ""
+
+#: ../index.php:315
+msgid "Workphone"
+msgstr ""
+
+#: ../index.php:316
+msgid "Reply method"
+msgstr ""
+
+#: ../index.php:337 ../index.php:342
+msgid "Thank you"
+msgstr ""
+
+#: ../index.php:338
+msgid ""
+"Your details have been sent to us and will be processed as soon as possible."
+msgstr ""
+
+#: ../index.php:343
+msgid "An error occurred while sending application email!"
+msgstr ""
+
+#: ../index.php:352
+msgid "The following calculator will give you indicative repayments."
+msgstr ""
+
+#: ../index.php:360
+msgid "Price of Car"
+msgstr ""
+
+#: ../index.php:363
+msgid "Finance Rate"
+msgstr ""
+
+#: ../index.php:367
+msgid "Less Deposit"
+msgstr ""
+
+#: ../index.php:371
+msgid "Less Trade In Allowance"
+msgstr ""
+
+#: ../index.php:375
+msgid "Monthly payment"
+msgstr ""
+
+#: ../index.php:375
+msgid "payment protection, presuming a typical APR of"
+msgstr ""
+
+#: ../index.php:380 ../index.php:389 ../index.php:398 ../index.php:407
+#: ../index.php:416
+msgid "month"
+msgstr ""
+
+#: ../index.php:423
+msgid "Total cost of the credit:"
+msgstr ""
+
+#: ../index.php:426
+msgid "Check/uncheck this box to view figures with/without Payment Protection"
+msgstr ""
+
+#: ../index.php:431
+msgid "Calculate"
+msgstr ""
+
+#: ../index.php:431
+msgid "Make Finance Application"
+msgstr ""
+
+#: ../index.php:439
+msgid "Finance Calculator created by"
+msgstr ""
