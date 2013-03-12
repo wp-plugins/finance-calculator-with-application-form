@@ -5,7 +5,7 @@ Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-ap
 Description: Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.4.2
+Version: 1.5
 
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011, 2012, 2013 Ciprian Popescu (getbutterfly@gmail.com)
@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // plugin paths
 define('WPFC_PLUGIN_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 define('WPFC_PLUGIN_PATH', WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_VERSION', '1.4.2');
+define('WPFC_VERSION', '1.5');
 //
 
 // plugin localization
@@ -35,7 +35,7 @@ $plugin_dir = basename(dirname(__FILE__));
 load_plugin_textdomain('wpfc', false, $plugin_dir . '/languages'); 
 //
 
-add_action('admin_menu', 'wpfc_plugin_menu');
+add_action('admin_menu', 'wpfcs_plugin_menu');
 
 add_option('wpfc_finance_rate', 11);
 add_option('wpfc_application_email', '');
@@ -61,74 +61,76 @@ if(!class_exists('wp_mail_from')) {
 	$wp_mail_from = new wp_mail_from();
 }
 
-function wpfc_plugin_menu() {
-	add_options_page(_('Finance Calculator', 'wpfc'), _('Finance Calculator', 'wpfc'), 'manage_options', 'wpfc', 'wpfc_plugin_options');
+function wpfcs_plugin_menu() {
+	add_options_page(_('Finance Calculator', 'wpfc'), _('Finance Calculator', 'wpfc'), 'manage_options', 'wpfcs', 'wpfc_plugin_options');
 }
 
 function wpfc_plugin_options() {
-	$hidden_field_name 		= 'wpfc_submit_hidden';
-	$data_field_name 		= 'wpfc_finance_rate';
-	$email_field_name 		= 'wpfc_application_email';
-	$currency_field_name 	= 'wpfc_currency';
-	$symbol_field_name 		= 'wpfc_currency_symbol';
-	$credit_field_name 		= 'wpfc_credit';
+    // See if the user has posted us some information // if they did, this hidden field will be set to 'Y'
+	if(isset($_POST['wpfcs_submit'])) {
+		update_option('wpfc_finance_rate', $_POST['wpfc_finance_rate']);
+		update_option('wpfc_application_email', $_POST['wpfc_application_email']);
+		update_option('wpfc_currency', $_POST['wpfc_currency']);
+		update_option('wpfc_currency_symbol', $_POST['wpfc_currency_symbol']);
+		update_option('wpfc_credit', $_POST['wpfc_credit']);
+
+		update_option('wpfcs_loan_options', $_POST['wpfcs_loan_options']);
+
+		echo '<div class="updated"><p><strong>Settings saved.</strong></p></div>';
+	}
 
 	// read in existing option value from database
-    $option_value_data 		= get_option('wpfc_finance_rate');
-    $option_value_email 	= get_option('wpfc_application_email');
-    $option_value_currency 	= get_option('wpfc_currency');
-    $option_value_symbol 	= get_option('wpfc_currency_symbol');
-    $option_value_credit 	= get_option('wpfc_credit');
+    $wpfc_finance_rate 		= get_option('wpfc_finance_rate');
+    $wpfc_application_email = get_option('wpfc_application_email');
+    $wpfc_currency 			= get_option('wpfc_currency');
+    $wpfc_currency_symbol 	= get_option('wpfc_currency_symbol');
+    $wpfc_credit 			= get_option('wpfc_credit');
 
-    // See if the user has posted us some information // if they did, this hidden field will be set to 'Y'
-	if(isset($_POST[$hidden_field_name]) && $_POST[$hidden_field_name] == 'Y') {
-		$option_value_data = $_POST[$data_field_name];
-		$option_value_email = $_POST[$email_field_name];
-		$option_value_currency = $_POST[$currency_field_name];
-		$option_value_symbol = $_POST[$symbol_field_name];
-		$option_value_credit = $_POST[$credit_field_name];
-
-		update_option('wpfc_finance_rate', $option_value_data);
-		update_option('wpfc_application_email', $option_value_email);
-		update_option('wpfc_currency', $option_value_currency);
-		update_option('wpfc_currency_symbol', $option_value_symbol);
-		update_option('wpfc_credit', $option_value_credit);
-		?>
-		<div class="updated"><p><strong>Settings saved.</strong></p></div>
-	<?php } ?>
+	$wpfcs_loan_options 	= get_option('wpfcs_loan_options');
+	?>
 	<div class="wrap">
 		<div id="icon-options-general" class="icon32"></div>
-		<h2>(<acronym title="WordPress Finance Calculator">WPFC</acronym>) Finance Calculator Settings</h2>
+		<h2>(<acronym title="WordPress Finance Calculator Suite">WPFCS</acronym>) Finance Calculator Suite Settings</h2>
 		<p>You are currently using <b>Finance Calculator</b> version <b><?php echo WPFC_VERSION; ?></b> with <b><?php bloginfo('charset'); ?></b> charset.</p>
-		<h3>Plugin Options</h3>
 		<form name="form1" method="post" action="">
-			<input type="hidden" name="<?php echo $hidden_field_name; ?>" value="Y" />
+			<h3>Finance Calculator Options</h3>
 			<p>
-				<input type="number" name="<?php echo $data_field_name; ?>" id="<?php echo $data_field_name; ?>" value="<?php echo $option_value_data; ?>" min="0" max="100"> <label for="<?php echo $data_field_name; ?>">Finance Rate <span class="description">- Monthly payment will be calculated using this default rate.</span></label>
+				<input type="number" name="wpfc_finance_rate" id="wpfc_finance_rate" value="<?php echo $wpfc_finance_rate; ?>" min="0" max="100"> <label for="wpfc_finance_rate">Finance Rate <span class="description">- Monthly payment will be calculated using this default rate.</span></label>
 			</p>
 			<p>
-				<input type="email" name="<?php echo $email_field_name; ?>" id="<?php echo $email_field_name; ?>" value="<?php echo $option_value_email; ?>" class="regular-text"> <label for="<?php echo $email_field_name; ?>">Application Email</label>
+				<input type="email" name="wpfc_application_email" id="wpfc_application_email" value="<?php echo $wpfc_application_email; ?>" class="regular-text"> <label for="wpfc_application_email">Application Email</label>
 				<br>
 				<span class="description">Application emails will be sent to this address.</span>
 			</p>
 			<p>
-				<input type="text" name="<?php echo $currency_field_name; ?>" id="<?php echo $currency_field_name; ?>" value="<?php echo $option_value_currency; ?>" size="3"> <label for="<?php echo $currency_field_name; ?>">Currency Code <span class="description">- Currency used in application emails. Use USD, EUR, GBP, YEN/JPY.</span></label>
+				<input type="text" name="wpfc_currency" id="wpfc_currency" value="<?php echo $wpfc_currency; ?>" size="3"> <label for="wpfc_currency">Currency Code <span class="description">- Currency used in application emails. Use USD, EUR, GBP, YEN/JPY.</span></label>
 				<br>
-				<input type="text" name="<?php echo $symbol_field_name; ?>" id="<?php echo $symbol_field_name; ?>" value="<?php echo $option_value_symbol; ?>" size="3"> <label for="<?php echo $symbol_field_name; ?>">Currency Symbol <span class="description">- Currency used in application emails. Use characters ($, &euro;, &pound;, &yen;) for symbol.</span></label>
+				<input type="text" name="wpfc_currency_symbol" id="wpfc_currency_symbol" value="<?php echo $wpfc_currency_symbol; ?>" size="3"> <label for="wpfc_currency_symbol">Currency Symbol <span class="description">- Currency used in application emails. Use characters ($, &euro;, &pound;, &yen;) for symbol.</span></label>
 			</p>
+
+			<h3>Loan Calculator Options</h3>
+			<p>
+				<input type="text" name="wpfcs_loan_options" id="wpfcs_loan_options" value="<?php echo $wpfcs_loan_options; ?>" class="regular-text"> <label for="<?php echo $wpfcs_loan_options; ?>">Loan Options</label>
+				<br>
+				<span class="description">These options will populate a <code>select</code> dropdown field (example: <b>name|percentage,name|percentage,name|percentage</b>)</span><br>
+				<span class="description">e.g. Motor Loan|7.9,Standard Loan|9,College Loan|7,Green Loan|7.9,Secured Loan|5.5,Savers Loan|5.5</span>
+			</p>
+
+			<h3>General Options</h3>
 			<p>
 				<select name="wpfc_credit">
-					<option value="1"<?php if($option_value_credit == 1) echo ' selected="selected"' ; ?>>Yes, show a link at the bottom of the calculator form</option>
-					<option value="0"<?php if($option_value_credit == 0) echo ' selected="selected"' ; ?>>No, do not show</option>
+					<option value="1"<?php if($wpfc_credit == 1) echo ' selected="selected"' ; ?>>Yes, show a link at the bottom of the calculator form</option>
+					<option value="0"<?php if($wpfc_credit == 0) echo ' selected="selected"' ; ?>>No, do not show</option>
 				</select> <label for="wpfc_credit">Help the author by providing a backlink to the official plugin site (optional).</label>
 			</p>
 			<p class="submit">
-				<input type="submit" name="submit" class="button-primary" value="Save Changes">
+				<input type="submit" name="wpfcs_submit" class="button-primary" value="Save Changes">
 			</p>
 		</form>
 
 		<h3>Plugin Usage</h3>
-		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the calculator. The calculator will use the default finance rate.</p>
+		<p>Add the <code>[finance_calculator]</code> shortcode to any post or page to start using the finance calculator. The calculator will use the default finance rate.</p>
+		<p>Add the <code>[loan_calculator]</code> shortcode to any post or page to start using the loan calculator.</p>
 		<p>
 			In order to correctly render the currency symbol, make sure you have the correct encoding in your theme header:<br>
 			<code>&lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;</code> or <code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> if you are using HTML5.
@@ -150,6 +152,103 @@ function wpfc_plugin_options() {
 	</div>
 <?php
 }
+
+function display_loan_calculator($atts, $content = null) {
+	extract(shortcode_atts(array(
+		'rate' => get_option('wpfc_finance_rate'),
+		'price' => ''
+	), $atts));
+
+	$display = '';
+
+	$display = '<script src="' . WPFC_PLUGIN_URL . '/includes/js.finance-1.4.js"></script>';
+	$display .= '
+	<form name="frmCalc">
+		<table>
+			<tr>
+				<td><strong>Loan Type:</strong></td>
+				<td>
+					<select name="slt_type" id="slt_type">
+						<option value="0">Select Loan Type...</option>';
+
+						$wpfcs_loan_options = explode(',', get_option('wpfcs_loan_options'));
+						foreach($wpfcs_loan_options as $cat) {
+							$cat_taxs = explode('|', $cat);
+							$display .= '<option value="' . $cat_taxs[1] . '">' . $cat_taxs[0] . ' (' . $cat_taxs[1] . '%)</option>';
+						}
+
+					$display .= '
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>Amount of Loan:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtAmt" type="text" id="txtAmt" size="10"></td>
+			</tr>
+			<tr>
+				<td>Repayment Period in Years:</td>
+				<td>
+					<select name="txtYrs" id="txtYrs" onchange="calcAmt(this.form);">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+					</select>
+					<input type="button" name="btnCalc" id="btnCalc" value="Calculate" onclick="calcAmt(this.form)">
+				</td>
+			</tr>
+			<tr>
+				<td>Weekly Payment:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtWk" type="text" size="10"></td>
+			</tr>
+			<tr>
+				<td>Fortnightly Payment:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtFn" type="text" size="10"></td>
+			</tr>
+			<tr>
+				<td>Monthly Payment:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtMnth" type="text" id="txtMnth2" size="10"></td>
+			</tr>
+			<tr>
+				<td>Total Repayment Amount:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtTotal" type="text" id="txtTotal" size="10"></td>
+			</tr>
+			<tr>
+				<td>Total Interest Payable:</td>
+				<td>' . get_option('wpfc_currency_symbol') . '<input name="txtInt" type="text" id="txtInt" size="10"></td>
+			</tr>
+		</table>
+	</form>';
+
+	return $display;
+}
+
 
 function display_finance_calculator($atts, $content = null) {
 	extract(shortcode_atts(array(
@@ -443,6 +542,7 @@ function display_finance_calculator($atts, $content = null) {
 }
 
 add_shortcode('finance_calculator', 'display_finance_calculator');
+add_shortcode('loan_calculator', 'display_loan_calculator');
 
 // Check for uninstall hook
 if(function_exists('register_uninstall_hook'))

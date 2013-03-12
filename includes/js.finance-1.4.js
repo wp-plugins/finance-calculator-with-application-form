@@ -1,5 +1,5 @@
 /*
-js Finance Calculator - v1.4
+js Finance Calculator Suite - v1.5
 Copyright (c) 2011-2013 Ciprian Popescu
 Licensed under the GPL license.
 */
@@ -155,4 +155,63 @@ function Calculate() {
 		}
 	}
 	document.getElementById('total_cost').value = Math.round(ppayment * 100) / 100;
+}
+
+function submitform(frm) {
+	frm.submit();
+}
+
+function calcAmt(frm) {
+	// get selected loan type value from the dropdown
+	var e = document.getElementById('slt_type');
+	var slt_value = e.options[e.selectedIndex].value;
+
+	var princ = frm.txtAmt.value; // principal
+	var i_mn = slt_value; // interest
+	var i_fn = slt_value;
+	var i_wk = slt_value;
+	var paymts_mn = frm.txtYrs.value * 12; // number of monthly payments
+	var paymts_fn = frm.txtYrs.value * 26;
+	var paymts_wk = frm.txtYrs.value * 52;
+
+	if(i_mn > 1.0) {
+		i_mn = i_mn / 100.0;
+	}
+	i_mn /= 12; // /= | x/=y | x=x/y
+
+	var pow_mn = 1;
+	for(var j = 0; j < paymts_mn; j++) {
+		pow_mn = pow_mn * (1 + i_mn);
+	}
+
+	if(i_fn > 1.0) {
+		i_fn = i_fn / 100.0;
+	}
+	i_fn /= 26;
+
+	var pow_fn = 1;
+	for(var j = 0; j < paymts_fn; j++) {
+		pow_fn = pow_fn * (1 + i_fn);
+	}
+
+	if(i_wk > 1.0) {
+		i_wk = i_wk / 100.0;
+	}
+	i_wk /= 52;
+
+	var pow_wk = 1;
+	for(var j = 0; j < paymts_wk; j++) {
+		pow_wk = pow_wk * (1 + i_wk);
+	}			
+
+	var LoanTotal = ((princ * pow_mn * i_mn) / (pow_mn - 1)) * paymts_mn;
+	frm.txtTotal.value = custRound(LoanTotal, 2);
+	frm.txtMnth.value = custRound(((princ * pow_mn * i_mn) / (pow_mn - 1)), 2);
+	frm.txtFn.value = custRound(((princ * pow_fn * i_fn) / (pow_fn - 1)), 2);
+	frm.txtWk.value = custRound(((princ * pow_wk * i_wk) / (pow_wk - 1)), 2);
+	frm.txtInt.value = custRound(LoanTotal - princ, 2);
+}
+
+function custRound(x,places) {
+	return (Math.round(x * Math.pow(10, places))) / Math.pow(10, places)
 }
