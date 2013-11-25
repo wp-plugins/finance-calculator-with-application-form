@@ -2,9 +2,9 @@
 Contributors: butterflymedia, getbutterfly
 Donate link: http://getbutterfly.com/
 Tags: finance, calculator, loans, ppp, payment protection, repayments
-Requires at least: 3.3
-Tested up to: 3.5.1
-Stable tag: 1.5
+Requires at least: 3.5
+Tested up to: 3.8-beta-1
+Stable tag: 1.5.1
 
 == Description ==
 
@@ -28,7 +28,7 @@ Check the [official homepage](http://getbutterfly.com/wordpress-plugins/finance-
 
 = How do I add the form to a post or page? =
 
-You need to add the `[finance_calculator]` shortcode to the body of the post/page or the `[loan_calculator]` shortcode.
+You need to add the `[finance_calculator]` or the `[loan_calculator]` shortcode to the body of the post/page.
 
 == Screenshots ==
 
@@ -38,6 +38,9 @@ You need to add the `[finance_calculator]` shortcode to the body of the post/pag
 3. Front-end form (details)
 
 == Changelog ==
+
+= 1.5.1 =
+* Tested compatibility with WordPress 3.8-beta-1
 
 = 1.5 =
 * Added a loan calculator

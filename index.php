@@ -5,7 +5,7 @@ Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-ap
 Description: Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.5
+Version: 1.5.1
 
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011, 2012, 2013 Ciprian Popescu (getbutterfly@gmail.com)
@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // plugin paths
 define('WPFC_PLUGIN_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
 define('WPFC_PLUGIN_PATH', WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_VERSION', '1.5');
+define('WPFC_VERSION', '1.5.1');
 //
 
 // plugin localization
@@ -36,14 +36,6 @@ load_plugin_textdomain('wpfc', false, $plugin_dir . '/languages');
 //
 
 add_action('admin_menu', 'wpfcs_plugin_menu');
-
-// settings menu
-function roold_wp_menu() {
-	add_menu_page('Roo Directory', 'Roo Directory', 'manage_options', __FILE__, 'roold_dashboard_page', ROOLD_PLUGIN_URL . '/images/icon-16-teal.png');
-
-	add_submenu_page(__FILE__, 'Dashboard', 'Dashboard', 'manage_options', __FILE__, 'roold_dashboard_page'); 
-	add_submenu_page(__FILE__, 'Directory Settings', 'Directory Settings', 'manage_options', 'roold_admin_page', 'roold_admin_page'); 
-}
 
 add_option('wpfc_finance_rate', 11);
 add_option('wpfc_application_email', '');
