@@ -1,10 +1,12 @@
 === Finance Calculator ===
 Contributors: butterflymedia, getbutterfly
-Donate link: http://getbutterfly.com/
+Donate link: http://getbutterfly.com/wordpress-plugins-free/
 Tags: finance, calculator, loans, ppp, payment protection, repayments
 Requires at least: 3.5
-Tested up to: 3.8-beta-1
-Stable tag: 1.5.1
+Tested up to: 3.8
+Stable tag: 1.5.2
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
@@ -38,6 +40,10 @@ You need to add the `[finance_calculator]` or the `[loan_calculator]` shortcode 
 3. Front-end form (details)
 
 == Changelog ==
+
+= 1.5.2 =
+* Added donate link
+* Added license link
 
 = 1.5.1 =
 * Tested compatibility with WordPress 3.8-beta-1
