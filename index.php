@@ -5,10 +5,10 @@ Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-ap
 Description: Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.5.2
+Version: 1.5.3
 
 WP Finance Calculator WordPress Plugin
-Copyright (C) 2010, 2011, 2012, 2013 Ciprian Popescu (getbutterfly@gmail.com)
+Copyright (C) 2010, 2011, 2012, 2013, 2014 Ciprian Popescu (getbutterfly@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,8 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // plugin paths
 define('WPFC_PLUGIN_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_PLUGIN_PATH', WP_PLUGIN_DIR . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_VERSION', '1.5.2');
+define('WPFC_VERSION', '1.5.3');
 //
 
 // plugin localization
@@ -41,7 +40,7 @@ add_option('wpfc_finance_rate', 11);
 add_option('wpfc_application_email', '');
 add_option('wpfc_currency', 'EUR');
 add_option('wpfc_currency_symbol', '&euro;');
-add_option('wpfc_credit', 0);
+add_option('wpfc_credit', 1);
 
 // Change email sender name from "WordPress" to the blog's name
 if(!class_exists('wp_mail_from')) {
@@ -119,8 +118,8 @@ function wpfc_plugin_options() {
 			<h3>General Options</h3>
 			<p>
 				<select name="wpfc_credit">
-					<option value="1"<?php if($wpfc_credit == 1) echo ' selected="selected"' ; ?>>Yes, show a link at the bottom of the calculator form</option>
-					<option value="0"<?php if($wpfc_credit == 0) echo ' selected="selected"' ; ?>>No, do not show</option>
+					<option value="1"<?php if($wpfc_credit == 1) echo ' selected' ; ?>>Yes, show a link at the bottom of the calculator form</option>
+					<option value="0"<?php if($wpfc_credit == 0) echo ' selected' ; ?>>No, do not show</option>
 				</select> <label for="wpfc_credit">Help the author by providing a backlink to the official plugin site (optional).</label>
 			</p>
 			<p class="submit">
@@ -420,27 +419,20 @@ function display_finance_calculator($atts, $content = null) {
 		function set_contenttype($content_type) {
 			return 'text/html';
 		}
-		add_filter('wp_mail_content_type','set_contenttype');
+		add_filter('wp_mail_content_type', 'set_contenttype');
 
 		// send email using WordPress function
-		$headers = 
-			"MIME-Version: 1.0\n".
-			"From: ".$_POST['EMAIL_2']."\n".
-			"Content-Type: text/html; charset=\"".get_settings('blog_charset')."\"\n";
+		$headers = '';
+		$headers[] = "From: " . get_option('blogname') . "<" . $_POST['EMAIL_2'] . ">\r\n";
+		$headers[] = "Content-Type: text/html;\r\n";
 
 		$to = $f_email;
 		$mail = wp_mail($to, $subject, $message, $headers);
 
 		if($mail)
-			echo '
-				<h3>' . __('Thank you', 'wpfc') . '</h3>
-				<p>' . __('Your details have been sent to us and will be processed as soon as possible.', 'wpfc') . '</p>
-			';
+			echo '<h3>' . __('Thank you', 'wpfc') . '</h3><p>' . __('Your details have been sent to us and will be processed as soon as possible.', 'wpfc') . '</p>';
 		else
-			echo '
-				<h3>' . __('Thank you', 'wpfc') . '</h3>
-				<p>' . __('An error occurred while sending application email!', 'wpfc') . '</p>
-			';
+			echo '<h3>' . __('Thank you', 'wpfc') . '</h3><p>' . __('An error occurred while sending application email!', 'wpfc') . '</p>';
 	}
 
 	else {

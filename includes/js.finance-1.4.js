@@ -1,6 +1,6 @@
 /*
 js Finance Calculator Suite - v1.5
-Copyright (c) 2011-2013 Ciprian Popescu
+Copyright (c) 2011-2014 Ciprian Popescu
 Licensed under the GPL license.
 */
 

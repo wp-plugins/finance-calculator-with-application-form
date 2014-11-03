@@ -2,9 +2,9 @@
 Contributors: butterflymedia, getbutterfly
 Donate link: http://getbutterfly.com/wordpress-plugins-free/
 Tags: finance, calculator, loans, ppp, payment protection, repayments
-Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 1.5.2
+Requires at least: 3.8
+Tested up to: 4.0
+Stable tag: 1.5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -40,6 +40,9 @@ You need to add the `[finance_calculator]` or the `[loan_calculator]` shortcode 
 3. Front-end form (details)
 
 == Changelog ==
+
+= 1.5.3 =
+* Added better email headers
 
 = 1.5.2 =
 * Added donate link
