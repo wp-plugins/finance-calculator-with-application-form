@@ -1,416 +1,420 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WordPress Finance Calculator\n"
-"POT-Creation-Date: 2013-02-23 09:51+0200\n"
-"PO-Revision-Date: 2013-02-23 09:52+0200\n"
+"POT-Creation-Date: 2015-04-14 10:06-0000\n"
+"PO-Revision-Date: 2015-04-14 10:06-0000\n"
 "Last-Translator: Ciprian Popescu <getbutterfly@gmail.com>\n"
 "Language-Team: Ciprian Popescu <getbutterfly@gmail.com>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-KeywordsList: _;_e;__\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-SearchPath-1: .\n"
 
-#: ../index.php:65
+#: ../index.php:64
 msgid "Finance Calculator"
 msgstr ""
 
-#: ../index.php:170
+#: ../index.php:268
 msgid "Finance Application Form"
 msgstr ""
 
-#: ../index.php:171
+#: ../index.php:269
 msgid "Required Fields"
 msgstr ""
 
-#: ../index.php:180
+#: ../index.php:278
 msgid "Vehicle Details"
 msgstr ""
 
-#: ../index.php:183 ../index.php:291
+#: ../index.php:281 ../index.php:389
 msgid "Make"
 msgstr ""
 
-#: ../index.php:184 ../index.php:292
+#: ../index.php:282 ../index.php:390
 msgid "Model"
 msgstr ""
 
-#: ../index.php:185
+#: ../index.php:283
 msgid "Spec"
 msgstr ""
 
-#: ../index.php:186
+#: ../index.php:284
 msgid "Year"
 msgstr ""
 
-#: ../index.php:189
+#: ../index.php:287
 msgid "Finance Details"
 msgstr ""
 
-#: ../index.php:192
+#: ../index.php:290
 msgid "List Price"
 msgstr ""
 
-#: ../index.php:193
+#: ../index.php:291
 msgid "Amount"
 msgstr ""
 
-#: ../index.php:194 ../index.php:288
+#: ../index.php:292 ../index.php:386
 msgid "Deposit"
 msgstr ""
 
-#: ../index.php:195
+#: ../index.php:293
 msgid "Trade In"
 msgstr ""
 
-#: ../index.php:198
+#: ../index.php:296
 msgid "Applicant Details"
 msgstr ""
 
-#: ../index.php:201
+#: ../index.php:299
 msgid "Please enter your first name!"
 msgstr ""
 
-#: ../index.php:201
+#: ../index.php:299
 msgid "First Name"
 msgstr ""
 
-#: ../index.php:202
+#: ../index.php:300
 msgid "Please enter your last name!"
 msgstr ""
 
-#: ../index.php:202
+#: ../index.php:300
 msgid "Last Name"
 msgstr ""
 
-#: ../index.php:203
+#: ../index.php:301
 msgid "Work Phone"
 msgstr ""
 
-#: ../index.php:204
+#: ../index.php:302
 msgid "Home Phone"
 msgstr ""
 
-#: ../index.php:205
+#: ../index.php:303
 msgid "Mobile Phone"
 msgstr ""
 
-#: ../index.php:206 ../index.php:284 ../index.php:302
+#: ../index.php:304 ../index.php:382 ../index.php:400
 msgid "Email Address"
 msgstr ""
 
-#: ../index.php:207
+#: ../index.php:305
 msgid "Confirm Email Address"
 msgstr ""
 
-#: ../index.php:208 ../index.php:295
+#: ../index.php:306 ../index.php:393
 msgid "Address"
 msgstr ""
 
-#: ../index.php:209
+#: ../index.php:307
 msgid "Previous Address"
 msgstr ""
 
-#: ../index.php:209
+#: ../index.php:307
 msgid "If less than 3 years"
 msgstr ""
 
-#: ../index.php:210
+#: ../index.php:308
 msgid "Years at Address"
 msgstr ""
 
-#: ../index.php:211
+#: ../index.php:309
 msgid "Years at Previous Address"
 msgstr ""
 
-#: ../index.php:232 ../index.php:283
+#: ../index.php:330 ../index.php:381
 msgid "Date of Birth"
 msgstr ""
 
-#: ../index.php:234
+#: ../index.php:332
 msgid "House Owner"
 msgstr ""
 
-#: ../index.php:235
+#: ../index.php:333
 msgid "Tenant"
 msgstr ""
 
-#: ../index.php:236
+#: ../index.php:334
 msgid "Living with Parents"
 msgstr ""
 
-#: ../index.php:237
+#: ../index.php:335
 msgid "Living Arrangement"
 msgstr ""
 
-#: ../index.php:239
+#: ../index.php:337
 msgid "Single"
 msgstr ""
 
-#: ../index.php:240
+#: ../index.php:338
 msgid "Married"
 msgstr ""
 
-#: ../index.php:241
+#: ../index.php:339
 msgid "Other"
 msgstr ""
 
-#: ../index.php:242 ../index.php:307
+#: ../index.php:340 ../index.php:405
 msgid "Marital Status"
 msgstr ""
 
-#: ../index.php:244
+#: ../index.php:342
 msgid "Phone"
 msgstr ""
 
-#: ../index.php:245
+#: ../index.php:343
+#, fuzzy
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
-#: ../index.php:246
+#: ../index.php:344
+#, fuzzy
 msgid "Reply By"
-msgstr ""
+msgstr "Svara"
 
-#: ../index.php:249
+#: ../index.php:347
 msgid "Employment Details"
 msgstr ""
 
-#: ../index.php:250 ../index.php:310
+#: ../index.php:348 ../index.php:408
 msgid "Occupation"
 msgstr ""
 
-#: ../index.php:252
+#: ../index.php:350
 msgid "Employer Name"
 msgstr ""
 
-#: ../index.php:253
+#: ../index.php:351
 msgid "Employer Address"
 msgstr ""
 
-#: ../index.php:254
+#: ../index.php:352
 msgid "years"
 msgstr ""
 
-#: ../index.php:254 ../index.php:378 ../index.php:387 ../index.php:396
-#: ../index.php:405 ../index.php:414
+#: ../index.php:352 ../index.php:469 ../index.php:478 ../index.php:487
+#: ../index.php:496 ../index.php:505
 msgid "months"
 msgstr ""
 
-#: ../index.php:254
+#: ../index.php:352
 msgid "Duration of Employment"
 msgstr ""
 
-#: ../index.php:255
+#: ../index.php:353
 msgid "Monthly Income (Net)"
 msgstr ""
 
-#: ../index.php:256
+#: ../index.php:354
 msgid "Monthly Mortgage"
 msgstr ""
 
-#: ../index.php:257
+#: ../index.php:355
 msgid "Spouse Income (Net)"
 msgstr ""
 
-#: ../index.php:258 ../index.php:296
+#: ../index.php:356 ../index.php:394
 msgid "Bank"
 msgstr ""
 
-#: ../index.php:259 ../index.php:297
+#: ../index.php:357 ../index.php:395
 msgid "Branch"
 msgstr ""
 
-#: ../index.php:260 ../index.php:294
+#: ../index.php:358 ../index.php:392
 msgid "Account Number"
 msgstr ""
 
-#: ../index.php:263
+#: ../index.php:361
 msgid "Additional Information"
 msgstr ""
 
-#: ../index.php:267
+#: ../index.php:365
 msgid "Select an option..."
 msgstr ""
 
-#: ../index.php:268
+#: ../index.php:366
 msgid "Yes"
 msgstr ""
 
-#: ../index.php:269
+#: ../index.php:367
 msgid "No"
 msgstr ""
 
-#: ../index.php:270
+#: ../index.php:368
 msgid "Do you consent to having your information credit checked"
 msgstr ""
 
-#: ../index.php:272
+#: ../index.php:370
 msgid "Submit Finance Application"
 msgstr ""
 
-#: ../index.php:279
+#: ../index.php:377
 msgid "Finance Application Form Email"
 msgstr ""
 
-#: ../index.php:282
+#: ../index.php:380
 msgid "Allow credit check?"
 msgstr ""
 
-#: ../index.php:285
+#: ../index.php:383
 msgid "Final price"
 msgstr ""
 
-#: ../index.php:286
+#: ../index.php:384
 msgid "List price"
 msgstr ""
 
-#: ../index.php:287
+#: ../index.php:385
 msgid "Trade in"
 msgstr ""
 
-#: ../index.php:289
+#: ../index.php:387
 msgid "Months"
 msgstr ""
 
-#: ../index.php:290
+#: ../index.php:388
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar till"
 
-#: ../index.php:293
+#: ../index.php:391
 msgid "Car spec"
 msgstr ""
 
-#: ../index.php:298
+#: ../index.php:396
 msgid "Company"
 msgstr ""
 
-#: ../index.php:299
+#: ../index.php:397
 msgid "Company address"
 msgstr ""
 
-#: ../index.php:300
+#: ../index.php:398
 msgid "Company months"
 msgstr ""
 
-#: ../index.php:301
+#: ../index.php:399
 msgid "Company years"
 msgstr ""
 
-#: ../index.php:303
+#: ../index.php:401
+#, fuzzy
 msgid "Name"
-msgstr ""
+msgstr "Namn"
 
-#: ../index.php:304
+#: ../index.php:402
 msgid "Homephone"
 msgstr ""
 
-#: ../index.php:305
+#: ../index.php:403
 msgid "Income"
 msgstr ""
 
-#: ../index.php:306
+#: ../index.php:404
 msgid "Live arr"
 msgstr ""
 
-#: ../index.php:308
+#: ../index.php:406
 msgid "Mobile"
 msgstr ""
 
-#: ../index.php:309
+#: ../index.php:407
 msgid "Mortgage"
 msgstr ""
 
-#: ../index.php:311
+#: ../index.php:409
 msgid "Previous address"
 msgstr ""
 
-#: ../index.php:312
+#: ../index.php:410
 msgid "Spouse income"
 msgstr ""
 
-#: ../index.php:313
+#: ../index.php:411
 msgid "Time at address"
 msgstr ""
 
-#: ../index.php:314
+#: ../index.php:412
 msgid "Time at previous address"
 msgstr ""
 
-#: ../index.php:315
+#: ../index.php:413
 msgid "Workphone"
 msgstr ""
 
-#: ../index.php:316
+#: ../index.php:414
 msgid "Reply method"
 msgstr ""
 
-#: ../index.php:337 ../index.php:342
+#: ../index.php:433 ../index.php:435
 msgid "Thank you"
 msgstr ""
 
-#: ../index.php:338
-msgid ""
-"Your details have been sent to us and will be processed as soon as possible."
+#: ../index.php:433
+msgid "Your details have been sent to us and will be processed as soon as possible."
 msgstr ""
 
-#: ../index.php:343
+#: ../index.php:435
 msgid "An error occurred while sending application email!"
 msgstr ""
 
-#: ../index.php:352
+#: ../index.php:443
 msgid "The following calculator will give you indicative repayments."
 msgstr ""
 
-#: ../index.php:360
+#: ../index.php:451
 msgid "Price of Car"
 msgstr ""
 
-#: ../index.php:363
+#: ../index.php:454
 msgid "Finance Rate"
 msgstr ""
 
-#: ../index.php:367
+#: ../index.php:458
 msgid "Less Deposit"
 msgstr ""
 
-#: ../index.php:371
+#: ../index.php:462
 msgid "Less Trade In Allowance"
 msgstr ""
 
-#: ../index.php:375
+#: ../index.php:466
 msgid "Monthly payment"
 msgstr ""
 
-#: ../index.php:375
+#: ../index.php:466
 msgid "payment protection, presuming a typical APR of"
 msgstr ""
 
-#: ../index.php:380 ../index.php:389 ../index.php:398 ../index.php:407
-#: ../index.php:416
+#: ../index.php:471 ../index.php:480 ../index.php:489 ../index.php:498
+#: ../index.php:507
 msgid "month"
 msgstr ""
 
-#: ../index.php:423
+#: ../index.php:514
 msgid "Total cost of the credit:"
 msgstr ""
 
-#: ../index.php:426
+#: ../index.php:517
 msgid "Check/uncheck this box to view figures with/without Payment Protection"
 msgstr ""
 
-#: ../index.php:431
+#: ../index.php:522
 msgid "Calculate"
 msgstr ""
 
-#: ../index.php:431
+#: ../index.php:522
 msgid "Make Finance Application"
 msgstr ""
 
-#: ../index.php:439
+#: ../index.php:530
 msgid "Finance Calculator created by"
 msgstr ""

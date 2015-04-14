@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: Finance Calculator
-Plugin URI: http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/
+Plugin URI: http://getbutterfly.com/wordpress-plugins-free/
 Description: Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.5.3
+Version: 1.5.4
 
 WP Finance Calculator WordPress Plugin
-Copyright (C) 2010, 2011, 2012, 2013, 2014 Ciprian Popescu (getbutterfly@gmail.com)
+Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015 Ciprian Popescu (getbutterfly@gmail.com)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // plugin paths
 define('WPFC_PLUGIN_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_VERSION', '1.5.3');
+define('WPFC_VERSION', '1.5.4');
 //
 
 // plugin localization
@@ -67,13 +67,13 @@ function wpfcs_plugin_menu() {
 function wpfc_plugin_options() {
     // See if the user has posted us some information // if they did, this hidden field will be set to 'Y'
 	if(isset($_POST['wpfcs_submit'])) {
-		update_option('wpfc_finance_rate', $_POST['wpfc_finance_rate']);
-		update_option('wpfc_application_email', $_POST['wpfc_application_email']);
-		update_option('wpfc_currency', $_POST['wpfc_currency']);
-		update_option('wpfc_currency_symbol', $_POST['wpfc_currency_symbol']);
-		update_option('wpfc_credit', $_POST['wpfc_credit']);
+		update_option('wpfc_finance_rate', floatval($_POST['wpfc_finance_rate']));
+		update_option('wpfc_application_email', sanitize_email($_POST['wpfc_application_email']));
+		update_option('wpfc_currency', sanitize_text_field($_POST['wpfc_currency']));
+		update_option('wpfc_currency_symbol', sanitize_text_field($_POST['wpfc_currency_symbol']));
+		update_option('wpfc_credit', sanitize_text_field($_POST['wpfc_credit']));
 
-		update_option('wpfcs_loan_options', $_POST['wpfcs_loan_options']);
+		update_option('wpfcs_loan_options', sanitize_text_field($_POST['wpfcs_loan_options']));
 
 		echo '<div class="updated"><p><strong>Settings saved.</strong></p></div>';
 	}
@@ -94,7 +94,7 @@ function wpfc_plugin_options() {
 		<form name="form1" method="post" action="">
 			<h3>Finance Calculator Options</h3>
 			<p>
-				<input type="number" name="wpfc_finance_rate" id="wpfc_finance_rate" value="<?php echo $wpfc_finance_rate; ?>" min="0" max="100"> <label for="wpfc_finance_rate">Finance Rate <span class="description">- Monthly payment will be calculated using this default rate.</span></label>
+				<input type="number" name="wpfc_finance_rate" id="wpfc_finance_rate" value="<?php echo $wpfc_finance_rate; ?>" min="0" max="100" step="0.1"> <label for="wpfc_finance_rate">Finance Rate <span class="description">- Monthly payment will be calculated using this default rate.</span></label>
 			</p>
 			<p>
 				<input type="email" name="wpfc_application_email" id="wpfc_application_email" value="<?php echo $wpfc_application_email; ?>" class="regular-text"> <label for="wpfc_application_email">Application Email</label>
@@ -157,8 +157,6 @@ function display_loan_calculator($atts, $content = null) {
 		'rate' => get_option('wpfc_finance_rate'),
 		'price' => ''
 	), $atts));
-
-	$display = '';
 
 	$display = '<script src="' . WPFC_PLUGIN_URL . '/includes/js.finance-1.4.js"></script>';
 	$display .= '
