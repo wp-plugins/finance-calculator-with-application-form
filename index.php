@@ -5,7 +5,7 @@ Plugin URI: http://getbutterfly.com/wordpress-plugins-free/
 Description: Finance Calculator is a drop in form for users to calculate indicative repayments. It can be implemented on a page or a post.
 Author: Ciprian Popescu
 Author URI: http://getbutterfly.com/
-Version: 1.5.4
+Version: 1.5.5
 
 WP Finance Calculator WordPress Plugin
 Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015 Ciprian Popescu (getbutterfly@gmail.com)
@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // plugin paths
 define('WPFC_PLUGIN_URL', WP_PLUGIN_URL . '/' . dirname(plugin_basename(__FILE__)));
-define('WPFC_VERSION', '1.5.4');
+define('WPFC_VERSION', '1.5.5');
 //
 
 // plugin localization
@@ -145,10 +145,13 @@ function wpfc_plugin_options() {
 		<p>Eligibility for payment protection is covered under the policy of each company. Please specify these details on the post or page itself.</p>
 
 		<p>Payment protection insurance is a standard add-on feature for many large loans such as car loans and other large bill obligations that could become a true nightmare should a disability or death occurs. This plan can offer a true measure of security for those who have grave reservations about how a large debt would be paid should a disaster strike. Any person with a small savings reservoir or someone heavily in debt would be a prime candidate for such a safety-net plan. Making sure that a plan is sound and customer friendly remains the responsibility of the buyer.</p>
-
-		<h3>Plugin Support</h3>
-		<p>For support, feature requests and bug reporting, please visit the <a href="http://getbutterfly.com/wordpress-plugins/finance-calculator-with-application-form/" rel="external">official website</a>.</p>
 	</div>
+    <div class="postbox">
+        <div class="inside">
+            <p>For support, feature requests and bug reporting, please visit the <a href="//getbutterfly.com/" rel="external">official website</a>.</p>
+            <p>&copy;<?php echo date('Y'); ?> <a href="//getbutterfly.com/" rel="external"><strong>getButterfly</strong>.com</a> &middot; <a href="//getbutterfly.com/forums/" rel="external">Support forums</a> &middot; <a href="//getbutterfly.com/trac/" rel="external">Trac</a> &middot; <small>Code wrangling since 2005</small></p>
+        </div>
+    </div>
 <?php
 }
 
